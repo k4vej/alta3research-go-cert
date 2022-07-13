@@ -1,0 +1,10 @@
+FROM golang:1.16.15
+
+WORKDIR /tmp
+
+RUN apt-get update -y
+RUN apt-get install -y vim coreutils less
+
+ENV TERM=xterm-256color
+
+WORKDIR /app
