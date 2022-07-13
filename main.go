@@ -1,13 +1,11 @@
-/* Author: Kayvan Javid
-This application is a submission for certification for the Alta3 Research
-GoLang proficiency course */
+/*
+Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 
+*/
 package main
 
-import (
-  "fmt"
-)
+import "github.com/k4vej/alta3research-go-cert/cmd"
 
 func main() {
-  fmt.Println("Hello world")
+	cmd.Execute()
 }
