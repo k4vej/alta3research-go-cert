@@ -1,7 +1,11 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+/* Author: Kayvan Javid
+   This application is a submission for certification for the Alta3 Research GoLang proficiency course.
 
+   This is the real main entry point as per orthodox CobraCLI projects.
+   Execute is wrapped by main.main() - providing the default CLI command if no additional
+   parameters or subcommands are specified, see: Execute().
 */
+
 package cmd
 
 import (
