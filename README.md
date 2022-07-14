@@ -32,6 +32,20 @@ Additionally there is a Makefile  wrapper to interact with these two containers.
 
 3. Manually build the application source directly on your host machine - if this is the method you choose, you're on your own.
 &nbsp;
+## Test suite
+
+---
+Running the test suite is wrapped up in test.sh which perform all the necessary steps.
+
+1. Recommended approach: use the Makefile convenience wrapper:
+	$ make test
+
+2. If you have a working environment to build and run the project on your host machine then simply invoke:
+	$ ./test.sh
+
+
+
+&nbsp;
 ## Contributing
 
 ---

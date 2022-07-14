@@ -37,11 +37,7 @@ test: build_dev
 	@echo "==> Running test suite..."
 	@# Mounting CWD (i.e. the src tree) into the container ensures container has the latest source code on disk
 	@# ensuring tests are run against current source tree - not a potentially stale container
-	@docker run -it -v "$$(pwd)":/app alta3research-go-cert_dev go test -v -coverpkg=./... -coverprofile=coverage.out ./...
-
-cover: test
-	@echo "==> Generating coverage report..."
-	@docker run -it -v "$$(pwd)":/app alta3research-go-cert_dev go tool cover -func ./coverage.out
+	@docker run -it -v "$$(pwd)":/app alta3research-go-cert_dev /app/test.sh
 
 dist: build
 	@echo "==> Extracting built binaries from runtime application container into $(BUILD_DIR)"
