@@ -2,23 +2,18 @@ package cmd
 
 import (
   "testing"
-  "fmt"
   "bytes"
   "strings"
   "io/ioutil"
   "github.com/spf13/cobra"
+  "github.com/k4vej/alta3research-go-cert/utils"
 )
 
-func Test_rootCommand(t *testing.T) {
+func Test_createRootCmd(t *testing.T) {
   command := createRootCmd()
   output, err := executeTestCommand(command, []string{""})
-  if err != nil {
-    t.FailNow()
-  }
-  if !strings.Contains(output, "swisscheese") {
-    fmt.Println("Output doesnt contain string: ", output)
-    t.FailNow()
-  }
+  utils.Ok(t, err)
+  utils.Assert(t, strings.Contains(output, "swisscheese"), "Default output doesn't contain expected string 'swisscheese'")
 }
 
 func executeTestCommand(cmd *cobra.Command, args []string) (string, error) {
