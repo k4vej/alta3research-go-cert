@@ -5,9 +5,9 @@ ARG APP_NAME
 WORKDIR /build
 
 COPY go.mod go.sum ./
-COPY main.go ./main.go
+COPY alta3research-gocert01.go ./alta3research-gocert01.go
 COPY cmd ./cmd
 
-RUN go build -o /app/$APP_NAME main.go
+RUN go build -o /app/$APP_NAME alta3research-gocert01.go
 
 WORKDIR /app

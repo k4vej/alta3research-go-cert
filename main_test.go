@@ -8,7 +8,7 @@ import (
 )
 
 func TestMain(t *testing.T) {
-  cmd := exec.Command("go", "run", "main.go")
+  cmd := exec.Command("go", "run", "alta3research-gocert01.go")
   boutput, err := cmd.CombinedOutput()
   output := string(boutput) // because out is []byte
   utils.Ok(t, err)
