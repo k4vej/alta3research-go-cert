@@ -1,7 +1,11 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+/* Author: Kayvan Javid
+   This application is a submission for certification for the Alta3 Research GoLang proficiency course.
 
+   This is the cpu subcommand of the main CLI, it wraps the existing gopsutil library to expose CPU hardware
+   info and utilization via CLI, for more info run:
+   swisscheese cpu --info|--top
 */
+
 package cmd
 
 import (
@@ -65,3 +69,4 @@ func topInfo() {
 	output, _ := cpu.Times(true)
 	spew.Dump(output)
 }
+

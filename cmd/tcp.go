@@ -1,7 +1,12 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+/* Author: Kayvan Javid
+   This application is a submission for certification for the Alta3 Research GoLang proficiency course.
 
+   This is the tcp subcommand of the main CLI, for more info run:
+   swisscheese tcp --help
+
+   By itself it performs no action, so has not real implementation other than to wrap further subcommands.
 */
+
 package cmd
 
 import (

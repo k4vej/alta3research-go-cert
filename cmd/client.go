@@ -1,7 +1,10 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+/* Author: Kayvan Javid
+   This application is a submission for certification for the Alta3 Research GoLang proficiency course.
 
+   This is the client subcommand of the tcp subcommand, for more info run:
+   swisscheese tcp client --help
 */
+
 package cmd
 
 import (

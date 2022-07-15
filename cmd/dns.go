@@ -1,7 +1,11 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+/* Author: Kayvan Javid
+   This application is a submission for certification for the Alta3 Research GoLang proficiency course.
 
+   This is the dns subcommand of the main CLI, it uses the GoLang DNS resolver to perform forward and
+   reverse DNS lookups of the specified addresses, for more info:
+   swisscheese dns --ip|--hostname
 */
+
 package cmd
 
 import (
@@ -77,3 +81,4 @@ func forwardLookupHostname(hostname string) {
 	}
 	fmt.Println(names)
 }
+
