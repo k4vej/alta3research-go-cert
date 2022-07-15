@@ -10,11 +10,14 @@
 package utils
 
 import (
+	"testing"
 	"fmt"
-	"path/filepath"
+	"bytes"
 	"runtime"
 	"reflect"
-	"testing"
+	"io/ioutil"
+	"path/filepath"
+	"github.com/spf13/cobra"
 )
 
 // assert fails the test if the condition is false.
@@ -42,4 +45,24 @@ func Equals(tb testing.TB, exp, act interface{}) {
 		fmt.Printf("\033[31m%s:%d:\n\n\texp: %#v\n\n\tgot: %#v\033[39m\n\n", filepath.Base(file), line, exp, act)
 		tb.FailNow()
 	}
+}
+
+// wraps execution of a Cobra command so that we can capture STDOUT + STDERR for inspection
+func ExecuteCobraCmd(cmd *cobra.Command, args []string) (string, error) {
+  captured_output := bytes.NewBufferString("")
+  cmd.SetOut(captured_output)
+  cmd.SetErr(captured_output)
+  cmd.SetArgs(args)
+
+  err := cmd.Execute()
+  if err != nil {
+    return "", err
+  }
+
+  parsed_output, err := ioutil.ReadAll(captured_output)
+  if err != nil {
+    return "", err
+  }
+
+  return string(parsed_output), err
 }
