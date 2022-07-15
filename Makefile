@@ -1,12 +1,14 @@
 include Makefile.vars
 
-copy_vim_files:
+copy_user_files:
 	@if [ ! -d "./.vim" ]; then cp -r -L "$$HOME/.vim" ./.vim; fi
 	@if [ ! -f "./.vimrc" ]; then cp -L "$$HOME/.vimrc" ./.vimrc; fi
+	@if [ ! -f "./.gitconfig" ]; then cp -L "$$HOME/.gitconfig" ./.gitconfig; fi
 
-remove_vim_files:
+remove_user_files:
 	@rm -rf ./.vim
 	@rm -f ./.vimrc
+	@rm -f ./.gitconfig
 
 build:
 	@echo "==> Building runtime application container using Dockerfile..."
@@ -16,7 +18,7 @@ run: build
 	@echo "==> Entering runtime container & executing application..."
 	@docker run -it alta3research-go-cert ./$(APP_NAME)
 
-build_dev: copy_vim_files build
+build_dev: copy_user_files build
 	@echo "==> Building development environment container using Dockerfile-dev..."
 	@# _dev container is layered ontop of runtime container via Dockerfile-dev FROM
 	@docker build -f Dockerfile-dev -t alta3research-go-cert_dev $(QUIET_DOCKER_BUILD) .
@@ -28,7 +30,7 @@ run_dev: build_dev
 	@# dependencies and environment as per the runtime, just with additional stuff.  Same same... just with more.
 	@docker run -it -v "$$(pwd)":/app alta3research-go-cert_dev /bin/bash || true
 
-clean: dist-clean remove_vim_files
+clean: dist-clean test-clean remove_user_files 
 	@echo "==> Destroying all container images..."
 	-@docker rmi -f alta3research-go-cert > /dev/null 2>&1 || true
 	-@docker rmi -f alta3research-go-cert_dev > /dev/null 2>&1 || true
@@ -38,6 +40,9 @@ test: build_dev
 	@# Mounting CWD (i.e. the src tree) into the container ensures container has the latest source code on disk
 	@# ensuring tests are run against current source tree - not a potentially stale container
 	@docker run -it -v "$$(pwd)":/app alta3research-go-cert_dev /app/test.sh
+
+test-clean:
+	@rm -f ./coverage.out
 
 dist: build
 	@echo "==> Extracting built binaries from runtime application container into $(BUILD_DIR)"
